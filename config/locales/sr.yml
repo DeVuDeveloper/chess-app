@@ -1,0 +1,6 @@
+sr:
+  global:
+    menu:
+      home: "Početna"
+      contact: "Kontakt"
+      login: "Prijavi se"
