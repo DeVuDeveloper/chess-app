@@ -6,5 +6,6 @@
   <% end %>
 
   <%= f.input :name, input_html: { autofocus: true }, class: "mb-4 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" %>
+  <%= link_to "Cancel", games_path, class: "btn btn--red py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
   <%= f.submit class: "btn btn--secondary py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
 <% end %>

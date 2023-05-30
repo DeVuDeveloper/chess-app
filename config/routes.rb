@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   
   root "home#index"
   resources :games
-  # mount ActionCable.server => '/cable'
 
   resources :home, only: :index
   get "contact", to: "home#contact_new"

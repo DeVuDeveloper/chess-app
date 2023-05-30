@@ -4,6 +4,7 @@
   <div class="header">
     <h1>New game</h1>
   </div>
-
-  <%= render "form", game: @game %>
+  <%= turbo_frame_tag @game do %>
+    <%= render "form", game: @game %>
+  <% end %>
 </main>
