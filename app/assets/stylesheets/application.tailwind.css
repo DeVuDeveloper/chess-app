@@ -1,3 +1,123 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Include Tailwind CSS in your HTML file or import it in your project */
+
+/* Add custom styles */
+body {
+    background-color: #f7fafc;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  .container {
+    max-width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .h-screen {
+    height: 100vh;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .max-w-md {
+    max-width: 28rem;
+  }
+  
+  .p-4 {
+    padding: 1rem;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f7fafc;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .text-gray-700 {
+    color: #4a5568;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+  .border-gray-300 {
+    border-color: #e2e8f0;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .bg-blue-500 {
+    background-color: #3b82f6;
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .hover\:bg-blue-600:hover {
+    background-color: #2563eb;
+  }

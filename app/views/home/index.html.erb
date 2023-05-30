@@ -1,12 +1,34 @@
-<div class="h-full max-w-64  m-0 p-2 lg:m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-auto">
-        <!-- Container -->
-        <div class="w-64 lg:w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-        <div class="w-64  lg:w-96 h h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-</div>
+<section class="bg-gray-100 overflow-scroll">
+  <header class="bg-white py-6">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl text-center text-gray-800 font-semibold">Chess Application</h1>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 mt-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+                 <%= image_tag "chess.png", alt: "Chess Image", class: "rounded-lg shadow-md" %>
+      </div>
+      <div class="flex flex-col overflow-auto">
+        <div class="max-h-64">
+          <h2 class="text-2xl text-gray-800 font-semibold mb-4">Master the Game of Chess</h2>
+          <p class="text-gray-600 mb-4">This is a professional chess application built with modern Rails framework, Hotwire, and Stimulus. Experience the thrill of playing chess online with real-time updates.</p>
+          <p class="text-gray-600 mb-4">Engage in strategic battles on the virtual chessboard, enhance your skills, and challenge opponents from around the world. Our intuitive interface and responsive design provide an immersive chess experience.</p>
+        </div>
+          <div class="flex justify-center text-center pt-8 mt-6 ">
+        <% if user_signed_in? %>
+          <%= link_to "Start", games_path, class: "btn btn--primary w-full py-3 px-6 text-white font-semibold rounded-lg shadow-md bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn--primary py-3 px-6 text-white font-semibold rounded-lg shadow-md bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+        <% end %>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  
+
+

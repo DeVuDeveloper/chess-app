@@ -4,5 +4,18 @@
 
 import { application } from "./application"
 
+import GamesController from "./games_controller"
+application.register("games", GamesController)
+
 import RemovalsController from "./removals_controller"
 application.register("removals", RemovalsController)
+
+Turbo.setProgressBarDelay(0);
+
+import consumer from "./consumer";
+consumer.subscriptions.create("GamesChannel", {
+  received(data) {
+    const turboFrame = document.getElementById("games");
+    turboFrame.insertAdjacentHTML("afterbegin", data);
+  }
+});

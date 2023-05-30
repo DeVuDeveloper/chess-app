@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_045314) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "state"
     t.integer "white_player_user_id"
     t.integer "black_player_user_id"
