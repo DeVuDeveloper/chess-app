@@ -2,8 +2,10 @@ en:
   global:
     menu:
       home: "Home"
+      games: "Games"
       contact: "Contact"
       login: "Login"
+
   
   en:
   simple_form:
