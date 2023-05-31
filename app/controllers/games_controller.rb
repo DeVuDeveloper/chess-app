@@ -3,7 +3,6 @@ class GamesController < ApplicationController
   
     def index
       @unmatched_games = Game.where(:white_player_user_id => nil).where.not(:black_player_user_id => nil).or (Game.where.not(:white_player_user_id => nil).where(:black_player_user_id => nil))
-    
     end
   
     def show
@@ -24,6 +23,7 @@ class GamesController < ApplicationController
       else
         render :new, status: :unprocessable_entity
       end
+      
     end
   
     def edit

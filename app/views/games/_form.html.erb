@@ -1,26 +1,19 @@
 <div class="grid grid-cols-2 pt-4 gap-4">
-  <div class="col-span-2 text-center">
-    <h2 class="text-xl font-bold mb-4">Choose the color of the chess pieces:</h2>
+    <div class="col-span-2 text-center">
+      <h2 class="text-xl font-bold mb-4">Choose the color of the chess pieces:</h2>
 
-    <div class="flex justify-center gap-8">
-      <%= simple_form_for @game, html: { class: "py-0" } do |f| %>
-        <%= f.input :white_player_user_id, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.input :turn_user_id, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.submit "", type: :image, src: image_path("whiteKing.png"), class: "player-button h-16" %>
-      <% end %>
+      <div class="flex justify-center gap-8">
+        <%= simple_form_for @game, html: { class: "py-0" } do |f| %>
+          <%= f.input :white_player_user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :turn_user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.submit "", type: :image, src: image_path("whiteKing.png"), class: "player-button h-16" %>
+        <% end %>
 
-      <%= simple_form_for @game do |f| %>
-        <%= f.input :black_player_user_id, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.submit "", type: :image, src: image_path("blackKing.png"), class: "player-button h-16" %>
-      <% end %>
-    </div>
-  </div>
+        <%= simple_form_for @game do |f| %>
+          <%= f.input :black_player_user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.submit "", type: :image, src: image_path("blackKing.png"), class: "player-button h-16" %>
+        <% end %>
+      </div>
+        <%= link_to "Cancel", games_path, class: " mt-4 btn btn-size py-1 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
 </div>
-
-
-
-
-
-
-
 
