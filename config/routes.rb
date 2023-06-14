@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   resources :home, only: :index
   get "contact", to: "home#contact_new"
   post "contact", to: "home#contact_create"
+
+  resources :chats, only: %i[new create show] do
+    resources :messages, only: %i[create]
+  end
   
 end

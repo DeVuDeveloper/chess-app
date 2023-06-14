@@ -25,6 +25,9 @@ module ChessApp
     config.load_defaults 7.0
 
     config.eager_load_paths << root.join("lib")
+    # config/application.rb
+    config.autoload_paths += %W(#{config.root}/app/jobs)
+
 
     config.i18n.available_locales = [:en, :sr]
     config.i18n.default_locale = :en

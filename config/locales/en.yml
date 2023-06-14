@@ -3,7 +3,9 @@ en:
     menu:
       home: "Home"
       games: "Games"
+      chat: "Chat"
       contact: "Contact"
+
       login: "Login"
 
   
