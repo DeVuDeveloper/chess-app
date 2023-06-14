@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "contact", to: "home#contact_new"
   post "contact", to: "home#contact_create"
 
-  resources :chats, only: %i[new create show] do
+  resources :chats  do
     resources :messages, only: %i[create]
   end
   
