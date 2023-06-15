@@ -1,5 +1,3 @@
-
-
 class MessagesController < ApplicationController
     include ActionView::RecordIdentifier
   

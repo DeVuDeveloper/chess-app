@@ -29,14 +29,14 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-    if @chat.destroy
- 
+    @chat.destroy
+   
     respond_to do |format|
       format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
       format.turbo_stream
     end
   end
-end
+
   private
 
   def set_chat

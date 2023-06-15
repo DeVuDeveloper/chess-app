@@ -13,20 +13,26 @@ class Message < ApplicationRecord
         "#{dom_id(chat)}_messages",
         partial: "messages/message",
         locals: { message: self, scroll_to: true },
-        target: "#{dom_id(chat)}_messages"
+        target: "#{dom_id(self)}_messages"  # Use `dom_id(self)` instead of `dom_id(chat)`
       )
     end
-  
+    
     def broadcast_updated
       broadcast_append_to(
         "#{dom_id(chat)}_messages",
         partial: "messages/message",
         locals: { message: self, scroll_to: true },
-        target: "#{dom_id(chat)}_messages"
+        target: "#{dom_id(self)}_messages"  # Use `dom_id(self)` instead of `dom_id(chat)`
       )
     end
+    
   
     def self.for_openai(messages)
       messages.map { |message| { role: message.role, content: message.content } }
     end
+
+    def assistant_message?
+      role == "assistant"
+    end
+    
 end  

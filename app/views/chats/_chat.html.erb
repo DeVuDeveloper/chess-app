@@ -1,16 +1,17 @@
 <%= turbo_frame_tag chat do %>
   <main class="container mx-auto px-4 py-4">
-    <div class="flex flex-col bg-gray-100 rounded-lg">
-      <div class="flex justify-between items-center">
+    <div class="flex flex-col bg-gray-100 rounded-lg shadow-md">
+      <div class="flex justify-between items-center bg-gray-200 p-4 rounded-t-lg">
         <%= link_to chat.id, chat_path(chat), data: { turbo_frame: "_top" }, class: "text-xl font-bold text-blue-500 hover:underline" %>
         <div class="flex">
           <%= button_to "Delete",
                         chat_path(chat),
                         method: :delete,
-                        class: "btn btn--light mr-2 text-red-500 hover:text-red-700" %>
+                        class: "btn btn--light text-red-500 hover:text-red-700" %>
         </div>
       </div>
-      <p>Chat created on <%= chat.created_at.strftime("%B %d, %Y %H:%M:%S") %></p>
+      <p class="p-4">Chat created on <%= chat.created_at.strftime("%B %d, %Y %H:%M:%S") %></p>
     </div>
   </main>
 <% end %>
+
