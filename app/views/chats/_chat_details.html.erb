@@ -1,0 +1,24 @@
+<%= turbo_frame_tag 'chat_details' do %>
+<div id="chat-details">
+  <% if chat %>
+    <div class="bg-white rounded-lg shadow-md w-full max-w-md">
+      <div class="bg-gray-800 rounded-t-lg p-4">
+        <h2 class="text-white text-xl font-semibold">Chat</h2>
+      </div>
+
+      <div class="p-4" data-target="chat.messages">
+        <ul role="list" class="overflow-y-auto max-h-[48vh] flex flex-col-reverse space-y-2 space-y-reverse divide-y divide-gray-200">
+          <%= render chat.messages %>
+        </ul>
+      </div>
+
+      <div class="bg-gray-100 rounded-b-lg p-4">
+        <%= render partial: "messages/form", locals: { chat: chat } %>
+      </div>
+    </div>
+  <% else %>
+    <p>Select a chat to view</p>
+  <% end %>
+</div>
+ <% end %>
+

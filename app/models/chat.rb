@@ -5,4 +5,6 @@ class Chat < ApplicationRecord
     scope :ordered, -> { order(id: :desc) }
 
     broadcasts_to ->(chat) { "chats" }, inserts_by: :prepend
+
+    
 end

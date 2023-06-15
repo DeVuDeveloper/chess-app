@@ -12,7 +12,7 @@ class GetAiResponseJob < ApplicationJob
     puts "Message created with ID: #{message.id}, content: '#{message.content}'"
     message.broadcast_created
   
-    openai_client = OpenAI::Client.new(access_token: "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")
+    openai_client = OpenAI::Client.new(access_token: "")
   
     response = openai_client.chat(
       parameters: {
