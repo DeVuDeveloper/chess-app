@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
  
@@ -12,4 +13,6 @@ Rails.application.routes.draw do
   resources :chats, except: :show do
     resources :messages, only: %i[create]
   end
+
+  mount Sidekiq::Web => "/sidekiq"
 end

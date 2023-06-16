@@ -1,0 +1,5 @@
+<div class="messages">
+  <% chat.messages.each do |message| %>
+    <%= render "messages/message", message: message, scroll_to: true %>
+  <% end %>
+</div>

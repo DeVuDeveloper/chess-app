@@ -4,10 +4,8 @@ class ChatsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @chats = Chat.ordered
-    @chats.each do |chat|
-      @chat = chat
-    end
+    @chats = Chat.includes(:messages).ordered
+    @chat = @chats.first if @chats.any?
   end
 
 

@@ -1,0 +1,8 @@
+<% if @chat.persisted? %>
+  // Assuming you have a chat partial '_chat.html.erb' for rendering a single chat
+  const chatHTML = '<%= j(render partial: "chat", locals: { chat: @chat }) %>';
+  const chatList = document.querySelector('#chat-list');
+  chatList.insertAdjacentHTML('beforeend', chatHTML);
+<% else %>
+  alert('Failed to create the chat');
+<% end %>
