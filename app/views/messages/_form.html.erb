@@ -1,16 +1,21 @@
-<%= turbo_frame_tag "#{dom_id(chat)}_message_form" do %>
-  <%= form_with(model: Message.new, url: [chat, Message.new]) do |form| %>
-    <%= form.hidden_field :chat_id, value: chat.id %>
-    
-    <div class="my-5">
-      <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-green-200 outline-none px-3 py-2 mt-2 w-full", autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();" %>
-    </div>
+<%= form_with(model: [chat, Message.new], url: chat_messages_path(chat_id: chat.id), id: dom_id(chat) + "_message_form", class: "flex items-center") do |form| %>
 
-    <div class="grid justify-items-end">
-      <%= form.button type: :submit, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" do %>
-        <i class="fas fa-paper-plane"></i>
-        <span class="pl-2">Send</span>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="flex-1">
+    <%= form.text_field :content, class: "w-full border-gray-300 rounded-l-lg py-2 px-4", placeholder: "Type your message...", data: { behavior: "submitOnEnter" } %>
+  </div>
+  <div class="ml-2">
+    <%= form.button raw('<svg xmlns="http://www.w3.org/2000/svg" class=" h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg" %>
+  </div>
 <% end %>
+
+<script>
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && event.target.getAttribute('data-behavior') === 'submitOnEnter') {
+      event.preventDefault();
+      const form = event.target.closest('form');
+      form.submit();
+    }
+  });
+</script>
+
+

@@ -1,44 +1,71 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chat, only: [:edit, :update, :destroy]
-  respond_to :html, :json
+ 
 
   def index
-    @chats = Chat.includes(:messages).ordered
-    @chat = @chats.first if @chats.any?
+    @chats = Chat.ordered
+    @chat = @chats.first
   end
 
 
-  def new
+   def show
+    @chat = Chat.find(params[:id])
+   end
+
+   def new
     @chat = Chat.new
-  end
+   end
+
 
   def create
-    @chat = Chat.create(user: current_user)
+    @chat = Chat.new(user_id: current_user.id)
     if @chat.save
-      @chat.broadcast_prepend_to("chats", partial: "chats/chat_details", locals: { chat: @chat }, target: "chat-details")
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to chats_path }
-      end
+      redirect_to chats_path
     else
-      render :new
+      @chats = current_user.chats
+      render :index
     end
   end
 
   def destroy
+    @chat = Chat.find(params[:id])
     @chat.destroy
-   
-    respond_to do |format|
-      format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
-      format.turbo_stream
+    redirect_to chats_url, notice: "Chat was successfully deleted."
+  end
+  private
+
+  def chat_params
+    params.require(:chat).permit(:user_id)
+  end
+end
+
+
+class ChatsController < ApplicationController
+  def index
+    @chats = Chat.all
+    @chat = Chat.new
+  end
+
+  def create
+    @chat = Chat.new(user_id: current_user.id)
+    if @chat.save
+      redirect_to chats_path
+    else
+      @chats = current_user.chats
+      render :index
     end
+  end
+
+  def destroy
+    @chat = Chat.find(params[:id])
+    @chat.destroy
+    redirect_to chats_path
   end
 
   private
 
-  def set_chat
-    @chat = Chat.find(params[:id])
+  def chat_params
+    params.require(:chat).permit(:user_id)
   end
 end
 

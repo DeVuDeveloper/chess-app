@@ -1,33 +1,29 @@
-<%= turbo_stream_from "chats" %>
-
-<section class="flex -mt-20">
-  <div class="w-1/4 bg-gray-100 p-4">
-    <div class="sticky top-0 mb-4">
-      <div class="flex justify-center text-center">
-        <%= form_with(model: @chat, url: chats_path, local: true, data: { remote: true }) do |form| %>
-          <div class="form-group">
-            <%= form.submit "New Chat", class: "btn btn--primary w-full py-3 px-6 text-white font-semibold rounded-lg shadow-md bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
-          </div>
-        <% end %>
-      </div>
+<div class="flex">
+<div class="h-screen bg-gray-800  px-6 overflow-visible w-64 pb-16">
+  <%= form_with(model: @chat, url: chats_path, local: true) do |form| %>
+    <div class="mb-4">
+      <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>' + "New Chat"), { action: "new" }, { class: "border border-gray-300 hover:border-gray-400 text-white font-bold py-2 px-4 rounded flex items-center" } %>
     </div>
-
-    <%= turbo_frame_tag "chats" do %>
-      <%= render @chats %>
+  <% end %>
+  <ul class="space-y-2">
+    <% @chats.each do |chat| %>
+      <li class="flex items-center justify-between">
+        <span class="text-white text-lg font-bold mr-2 truncate w-32"><%= chat.id %></span>
+        <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'), chat_path(chat), method: :delete, data: { confirm: "Are you sure?" }, class: "hover:text-red-500 font-bold py-2 px-4 rounded", remote: true %>
+      </li>
     <% end %>
-  </div>
+  </ul>
+</div>
 
-  <div class="flex-1 bg-white p-4">
-    <div style="max-height: calc(100vh - 4rem);">
-      <%= turbo_frame_tag "chat-details" do %>
-        <%= render partial: "chats/chat_details", locals: { chat: @chat } %>
-      <% end %>
+  <div class="flex-1 flex-col justify-between items-between">
+  <% @chats.each do |chat| %>
+    <%= turbo_stream_from "#{dom_id(chat)}_messages" %>
+    <div id="<%= dom_id(chat) %>_messages" class="break-words">
+      <%= render chat.messages %>
     </div>
-  </div>
-</section>
-
-
-
-
-
-
+    <div id="<%= dom_id(chat) %>_message_form" class="mb-4 ">
+      <%= render partial: "messages/form", locals: { chat: chat } %>
+    </div>
+  <% end %>
+</div>
+</div>

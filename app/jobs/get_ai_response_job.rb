@@ -2,7 +2,6 @@ require 'sidekiq'
 
 class GetAiResponseJob < SidekiqJob
 
-
   def perform(chat_id)
     chat = Chat.find(chat_id)
     call_openai(chat: chat)
@@ -37,4 +36,3 @@ class GetAiResponseJob < SidekiqJob
   end
   
 end
-

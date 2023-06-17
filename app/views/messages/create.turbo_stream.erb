@@ -1,9 +1,7 @@
-<%= turbo_stream.append "#{@message.chat.id}_messages" do %>
-  <%= render partial: "messages/message", locals: { message: @message, scroll_to: true } %>
+<%= turbo_stream.append "#{dom_id(@message.chat)}_messages" do %>
+  <%= render "message", message: @message, scroll_to: true %>
 <% end %>
-
-<%= turbo_stream.replace "#{@message.chat.id}_message_form" do %>
-  <%= render partial: "messages/form", locals: { chat: @message.chat } %>
+<%= turbo_stream.replace "#{dom_id(@message.chat)}_message_form" do %>
+  <%= render "form", chat: @message.chat %>
 <% end %>
-
 
