@@ -1,29 +1,61 @@
 <div class="flex">
-<div class="h-screen bg-gray-800  px-6 overflow-visible w-64 pb-16">
-  <%= form_with(model: @chat, url: chats_path, local: true) do |form| %>
-    <div class="mb-4">
-      <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>' + "New Chat"), { action: "new" }, { class: "border border-gray-300 hover:border-gray-400 text-white font-bold py-2 px-4 rounded flex items-center" } %>
-    </div>
-  <% end %>
-  <ul class="space-y-2">
-    <% @chats.each do |chat| %>
-      <li class="flex items-center justify-between">
-        <span class="text-white text-lg font-bold mr-2 truncate w-32"><%= chat.id %></span>
-        <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'), chat_path(chat), method: :delete, data: { confirm: "Are you sure?" }, class: "hover:text-red-500 font-bold py-2 px-4 rounded", remote: true %>
-      </li>
+  <div class="h-screen bg-gray-800 px-6 overflow-visible w-64 pb-16">
+    <%= form_with(model: @chat, url: chats_path, local: true) do |form| %>
+      <div class="mb-4">
+        <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>' + "New Chat"), { action: "new" }, { class: "border border-gray-300 hover:border-gray-400 text-white font-bold py-2 px-4 rounded flex items-center" } %>
+      </div>
     <% end %>
-  </ul>
-</div>
+    <ul class="space-y-2">
+      <% @chats.each do |chat| %>
+        <li class="flex items-center justify-between">
+          <span class="text-white text-lg font-bold mr-2 truncate w-32"><%= chat.id %></span>
+          <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'), chat_path(chat), method: :delete, data: { confirm: "Are you sure?" }, class: "hover:text-red-500 font-bold py-2 px-4 rounded", remote: true %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
   <div class="flex-1 flex-col justify-between items-between">
-  <% @chats.each do |chat| %>
-    <%= turbo_stream_from "#{dom_id(chat)}_messages" %>
-    <div id="<%= dom_id(chat) %>_messages" class="break-words">
-      <%= render chat.messages %>
-    </div>
-    <div id="<%= dom_id(chat) %>_message_form" class="mb-4 ">
-      <%= render partial: "messages/form", locals: { chat: chat } %>
-    </div>
+  <% if @chats.any? %>
+    <% chat = @chats.first %>
+      <%= turbo_stream_from "#{dom_id(chat)}_messages" %>
+      <div id="<%= dom_id(chat) %>_messages" class="chat-messages-scroll break-words" style="overflow-y: auto; max-height: calc(100vh - 16rem);">
+        <%= render chat.messages %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="message-form" class="fixed bottom-0 mb-4" style="position: fixed; bottom: 0; right:20px; left:340px;">
+  <% if @chats.any? %>
+    <% chat = @chats.first %>
+    <%= render partial: "messages/form", locals: { chat: chat } %>
   <% end %>
 </div>
-</div>
+
+
+<script>
+document.addEventListener('turbo:load', () => {
+  console.log('turbo:load event triggered');
+  const chatMessagesContainer = document.getElementsByClassName('chat-messages-scroll')[0];
+  console.log('chatMessagesContainer:', chatMessagesContainer);
+  console.log('scrollHeight:', chatMessagesContainer.scrollHeight);
+
+  // Create a new MutationObserver instance
+  const observer = new MutationObserver((mutationsList, observer) => {
+    // If the addedNodes property has one or more nodes
+    for(let mutation of mutationsList) {
+      if(mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        console.log('New scroll position:', chatMessagesContainer.scrollTop);
+      }
+    }
+  });
+
+  // Start observing the chat messages container for configuration changes
+  observer.observe(chatMessagesContainer, { childList: true });
+});
+
+
+</script>
+

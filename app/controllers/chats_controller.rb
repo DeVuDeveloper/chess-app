@@ -4,8 +4,8 @@ class ChatsController < ApplicationController
 
   def index
     @chats = Chat.ordered
-    @chat = @chats.first
   end
+
 
 
    def show

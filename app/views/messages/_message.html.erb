@@ -32,7 +32,9 @@
             </button>
           </div>
           <% if content_parts.size > 2 %>
-            <div class="bg-gray-100 py-2 px-4 rounded-b-md"><%= content_parts[2..-1].join('```') %></div>
+            <div class="px-4 rounded-b-md">
+             <%= content_parts[2..-1].join('') %>
+             </div>
           <% end %>
         </div>
         <style>
