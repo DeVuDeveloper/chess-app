@@ -165,8 +165,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kramdown (2.4.0)
-      rexml
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -185,7 +183,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.18.0)
+    minitest (5.18.1)
     msgpack (1.7.1)
     multipart-post (2.3.0)
     net-imap (0.3.6)
@@ -373,7 +371,6 @@ DEPENDENCIES
   faker
   i18n_generators
   jsbundling-rails
-  kramdown
   letter_opener
   pg (~> 1.1)
   propshaft

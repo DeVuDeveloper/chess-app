@@ -80,4 +80,5 @@ gem "rufo"
 gem 'i18n_generators'
 gem "sidekiq", "~> 7.0.9"
 gem "ruby-openai", "~> 4.0.0"
-gem 'kramdown'
+
+
