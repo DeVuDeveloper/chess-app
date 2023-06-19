@@ -1,17 +1,35 @@
-<%= turbo_frame_tag chat do %>
-  <main class="container mx-auto px-4 py-4">
-    <div class="flex flex-col bg-gray-100 rounded-lg">
-      <div class="flex justify-between items-center">
-        <%= link_to chat.id, chat_path(chat), data: { turbo_frame: "_top" }, class: "text-xl font-bold text-blue-500 hover:underline" %>
-        <div class="flex">
-          <%= button_to "Delete",
-                        chat_path(chat),
-                        method: :delete,
-                        class: "btn btn--light mr-2 text-red-500 hover:text-red-700" %>
-        </div>
+<%= turbo_frame_tag dom_id(chat) do %>
+  <ul class="space-y-2">
+    <li class="flex items-center justify-between">
+      <span class="text-white text-lg font-bold mr-2 truncate w-32"><%= chat.id %></span>
+      <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'), chat_path(chat), method: :delete, data: { confirm: "Are you sure?" }, class: "hover:text-red-500 font-bold py-2 px-4 rounded", remote: true %>
+    </li>
+  </ul>
+  
+  <%= turbo_frame_tag "#{dom_id(chat)}" do %>
+    <div class="flex-1 flex-col justify-between items-between">
+      <%= turbo_stream_from "#{dom_id(chat)}_messages" %>
+      <div id="<%= dom_id(chat) %>_messages" class="chat-messages-scroll break-words" style="overflow-y: auto; max-height: calc(100vh - 16rem);position: fixed; right: 20px; left: 340px;">
+        <%= render chat.messages %>
       </div>
-      <p>Chat created on <%= chat.created_at.strftime("%B %d, %Y %H:%M:%S") %></p>
+  
+      <div id="<%= dom_id(chat) %>_form" class="fixed bottom-0 mb-4" style="position: fixed; bottom: 0; right: 20px; left: 340px;">
+        <%= render partial: "messages/form", locals: { chat: chat } %>
+      </div>
     </div>
-  </main>
+  <% end %>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
 

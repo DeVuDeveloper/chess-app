@@ -10,7 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
     
-    <%= turbo_include_tags %>
+   <%= turbo_frame_tag "turbo-stream-frames" %>
    
   </head>
 
