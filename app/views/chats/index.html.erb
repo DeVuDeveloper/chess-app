@@ -6,53 +6,17 @@
       <div class="mb-4">
         <%= button_to raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>' + "New Chat"), { action: "new" }, { class: "border border-gray-300 hover:border-gray-400 text-white font-bold py-2 px-4 rounded flex items-center", data: { turbo_frame: "chats", action: "click->chats#createChat" } } %>
       </div>
-  <% end %>
- 
+    <% end %>
+    
     <%= turbo_frame_tag 'chats' do %>
       <%= render @chats %>
     <% end %>
- 
   </div>
+</div>
 
 
 
 
 
-<script>
-document.addEventListener('turbo:load', () => {
-  console.log('turbo:load event triggered');
-  const chatMessagesContainer = document.getElementsByClassName('chat-messages-scroll')[0];
-  console.log('chatMessagesContainer:', chatMessagesContainer);
-  console.log('scrollHeight:', chatMessagesContainer.scrollHeight);
 
-  // Create a new MutationObserver instance
-  const observer = new MutationObserver((mutationsList, observer) => {
-    // If the addedNodes property has one or more nodes
-    for(let mutation of mutationsList) {
-      if(mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-        console.log('New scroll position:', chatMessagesContainer.scrollTop);
-      }
-    }
-  });
-
-  // Start observing the chat messages container for configuration changes
-  observer.observe(chatMessagesContainer, { childList: true });
-});
-
-
-
-
-document.addEventListener('turbo:load', () => {
-  const toggleMessageForm = () => {
-    const chatForm = document.getElementById('chat-form');
-    chatForm.classList.toggle('hidden');
-  };
-
-  window.chats = {
-    toggleMessageForm
-  };
-});
-
-</script>
 

@@ -9,7 +9,8 @@ class ChatsController < ApplicationController
     @chat = Chat.new
   end
 
-
+ 
+  
 
    
 
@@ -23,7 +24,7 @@ class ChatsController < ApplicationController
   
     if @chat.save
       respond_to do |format|
-        format.html { redirect_to chat_path(@chat), notice: "Chat was successfully created." }
+        format.html { redirect_to chats_path, notice: "Chat was successfully created." }
    
         format.turbo_stream
  

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(chat) do %>
+ <%= turbo_frame_tag dom_id(chat) do %>
   <div id="<%= dom_id(chat) %>_form" class="fixed bottom-0 mb-4" style="position: fixed; bottom: 0; right: 20px; left: 340px;">
     <%= form_with(model: Message.new, url: chat_messages_path(chat), data: { turbo_frame: dom_id(chat) }, class: "flex items-center") do |form| %>
       <div class="flex-1">
