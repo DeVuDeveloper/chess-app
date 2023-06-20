@@ -9,7 +9,7 @@
     <% end %>
     
     <%= turbo_frame_tag 'chats' do %>
-      <%= render @chats %>
+      <%= render partial: "chat", collection: @chats %>
     <% end %>
   </div>
 </div>

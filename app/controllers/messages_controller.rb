@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
+   
     @message = Message.create(message_params.merge(chat_id: params[:chat_id], role: "user"))
 
     GetAiResponseJob.perform_async(@message.chat_id)

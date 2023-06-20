@@ -1,18 +1,14 @@
-
-
 class ChatsController < ApplicationController
   before_action :authenticate_user!
- 
 
   def index
-    @chats = Chat.all
+    @chats = Chat.ordered
     @chat = Chat.new
   end
 
- 
-  
-
-   
+  def show
+    @chat = Chat.find(params[:id])
+  end
 
   def new
     @chat = Chat.new
@@ -21,30 +17,24 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(user_id: current_user.id)
-  
+
     if @chat.save
       respond_to do |format|
         format.html { redirect_to chats_path, notice: "Chat was successfully created." }
-   
+
         format.turbo_stream
- 
-      end 
+      end
     end
   end
-   
-  
- 
 
   def destroy
-  @chat = Chat.find(params[:id])
-  @chat.destroy
-  respond_to do |format|
-    format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
-    format.turbo_stream { render turbo_stream: turbo_stream.remove(@chat) }
+    @chat = Chat.find(params[:id])
+    @chat.destroy
+    respond_to do |format|
+      format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
+      format.turbo_stream
   end
 end
-  
-  
 
   private
 
@@ -52,5 +42,3 @@ end
     params.require(:chat).permit(:user_id)
   end
 end
-
-

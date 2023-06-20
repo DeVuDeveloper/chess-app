@@ -20,10 +20,7 @@ class GamesController < ApplicationController
           format.html { redirect_to game_path(@game), notice: "Game was successfully created." }
           format.turbo_stream
         end
-      else
-        render :new, status: :unprocessable_entity
       end
-      
     end
   
     def edit
