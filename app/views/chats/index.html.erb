@@ -1,3 +1,4 @@
+
 <%= turbo_stream_from "chats" %>
 
 <div class="flex">
@@ -9,10 +10,19 @@
     <% end %>
     
     <%= turbo_frame_tag 'chats' do %>
-      <%= render partial: "chat", collection: @chats %>
+      <%= render @chats %>
+      <%= render partial: "chats/chat_window", locals: { chat: @chats.first } %>
     <% end %>
   </div>
 </div>
+
+
+
+
+<% console %>
+
+
+   
 
 
 
