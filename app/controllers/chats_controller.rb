@@ -6,6 +6,7 @@ class ChatsController < ApplicationController
   def index
     @chats = @user.chats.ordered
     @chat = @chats.first
+    @user = current_user
   end
 
   def new

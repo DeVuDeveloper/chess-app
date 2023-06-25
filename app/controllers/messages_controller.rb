@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:new, :create]
   before_action :set_chat
   before_action :set_message, only: [:edit, :update, :destroy]
 

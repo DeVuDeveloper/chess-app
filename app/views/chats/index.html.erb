@@ -1,17 +1,17 @@
 <%= turbo_stream_from  "chats" %>
   
 
-  <div class="header">
-    <h1>
-      <%= @user.email %>
-    </h1>
+ 
 
      <%= render partial: "form", locals: { user: @user, chat: Chat.new } %>
-  </div>
+ 
 
 
   <%= turbo_frame_tag "chats" do %>
     <%= render @chats, user: @user %>
+  
   <% end %>
 
 
+
+   
