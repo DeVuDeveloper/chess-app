@@ -1,0 +1,6 @@
+<%= turbo_stream.replace @message do %>
+  <%= render @message, user: @user, chat: @chat %>
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>
+

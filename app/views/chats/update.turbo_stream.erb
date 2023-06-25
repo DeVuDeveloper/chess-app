@@ -1,0 +1,10 @@
+<%# Step 1: remove the form %>
+<%= turbo_stream.remove @chat %>
+
+<%# Step 2: insert the updated date at the correct position %>
+
+  <%= turbo_stream.prepend "chats" do %>
+<%= render partial: "chat", locals: { user: @user, chat: @chat } %>
+  <% end %>
+
+<%= render_turbo_stream_flash_messages %>

@@ -1,3 +1,5 @@
+<%= turbo_frame_tag message do %>
+
 <div id="<%= dom_id(message) %>_messages">
 
   <% if message.user? %>
@@ -77,4 +79,4 @@
     </div>
   <% end %>
 </div>
- 
+   <% end %>

@@ -1,6 +1,7 @@
-<%= form_with(model: @chat, url: chats_path, local: true) do |form| %>
-  <div class="form-group">
-   <%= form.submit "Create Chat", class: "btn btn-primary" %>
+<%= simple_form_for [user, chat], html: { class: "form chat" } do |f| %>
+  <%= form_error_notification(chat) %>
 
-  </div>
+  <%= link_to "Cancel", user_chats_path(@user), class: "btn btn--light" %>
+  <%= f.submit class: "btn btn--secondary" %>
 <% end %>
+

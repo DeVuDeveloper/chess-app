@@ -1,0 +1,7 @@
+
+<%= turbo_stream.prepend "chats" do %>
+  <%= render partial: "chat", locals: { user: @user, chat: @chat } %>
+<% end %>
+
+<%= render_turbo_stream_flash_messages %>
+

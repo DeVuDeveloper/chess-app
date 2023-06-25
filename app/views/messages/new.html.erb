@@ -1,0 +1,12 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to user"), user_chats_path(@user) %>
+
+  <div class="header">
+    <h1>New message for <%= @chat.id %></h1>
+  </div>
+
+  <%= turbo_frame_tag nested_dom_id(@chat, Message.new) do %>
+    <%= render partial: "form", locals: {user: @user, chat: @chat, message: @message} %>
+   
+  <% end %>
+</main>

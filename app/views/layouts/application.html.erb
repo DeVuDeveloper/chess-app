@@ -18,7 +18,7 @@
   
   <main class="h-screen w-full bg-white relative flex overflow-hidden">
   <div class="fixed top-4rem right-1/2 transform translate-x-1/2 flex-col max-w-[100%] w-max gap-5rem px-0 py-4">
-    <%= render(FlashComponent.new(notice: notice, alert: alert)) %>
+     <%= render "layouts/flash" %>
   </div>
   <%= render(SidebarComponent.new(user: current_user)) %> 
   <section class="w-full h-full flex flex-col justify-between">

@@ -1,5 +1,12 @@
-<%= form_with(model: @chat, url: chats_path, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.submit "Create Chat", class: "btn btn-primary" %>
+
+
+  <%= link_to sanitize("&larr; Back to user"), user_chats_path(@user) %>
+
+  <div class="header">
+    <h1>New Chat</h1>
   </div>
-<% end %>
+
+  <%= turbo_frame_tag @chat do %>
+    <%= render "form", user: @user, chat: @chat %>
+  <% end %>
+</main>

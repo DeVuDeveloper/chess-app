@@ -1,0 +1,14 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to user"), user_path(@user) %>
+
+  <div class="header">
+    <h1>Edit item</h1>
+  </div>
+
+  <%= turbo_frame_tag @message do %>
+    <%= render "form",
+              user: @user,
+              message_content: @message_content,
+              message: @message %>
+  <% end %>
+</main>
