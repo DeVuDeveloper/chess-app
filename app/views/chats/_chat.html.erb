@@ -1,42 +1,37 @@
 <%= turbo_frame_tag chat do %>
+
   <div class="chat">
     <%= turbo_frame_tag dom_id(chat, :edit) do %>
       <div class="chat__header">
         <h2 class="chat__title">
           <%= chat.id %>
-          <%= user.email%>
+         
         </h2>
         <div class="chat__actions">
           <%= button_to "Delete",
-                    [user, chat],
+                    [chat],
                     method: :delete,
                     
                     class: "btn btn--light" %>
           <%= link_to "Edit",
-                  [:edit, user, chat],
+                  [:edit, chat],
                   class: "btn btn--light" %>
         </div>
       </div>
     <% end %>
 
-    <div class="chat__body">
+    <% end %>
 
-      <%= turbo_frame_tag nested_dom_id(chat, "messages") do %>
+    <div class = "fixed top-0 right-0">
 
-        <%= turbo_stream_from "#{dom_id(chat)}_messages" %>
-      <div id="<%= dom_id(chat) %>_messages" class="chat-messages-scroll break-words" style="overflow-y: auto; max-height: calc(100vh - 16rem);position: fixed; top: 60px; right: 20px; left: 340px;">
-        <%= render chat.messages, chat: chat%>
-        <%= chat.id %>
-         </div>
-      <% end %>
-
-      <%= turbo_frame_tag nested_dom_id(chat, Message.new) %>
-      <div class="chat__footer">
-      
-
-        <%= render partial: "messages/form", locals: { user: @user, chat: @chat, message: Message.new } %> 
-
+    <%= turbo_frame_tag nested_dom_id(@chat, "messages") do %>
+      <%= turbo_stream_from "#{dom_id(@chat)}_messages" %>
+      <div id="<%= dom_id(@chat) %>_messages" class="chat-messages-scroll break-words" style="overflow-y: auto; max-height: calc(100vh - 16rem);position: fixed; top: 60px; right: 20px; left: 340px;">
+        <%= render @chat.messages, user: @user, chat: @chat%>
+        <%= @chat.id %>
+        <h2>prozor</h2>
       </div>
+    <% end %>
     </div>
+
   </div>
-<% end %>

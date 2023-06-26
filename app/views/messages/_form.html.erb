@@ -1,17 +1,19 @@
-<%= simple_form_for [user, chat, message],
-                    html: { class: "message" } do |f| %>
 
-  <%= form_error_notification(message) %>
+
+
+    <%= simple_form_for [chat, Message.new], html: { class: "message" } do |f| %>
+      <%= form_error_notification(message) %>
+      <%= f.input :content, wrapper_html: { class: "content" } %>
+      <div class="line-item__actions">
+        <%= f.submit "Send Message", class: "btn btn--secondary" %>
+      </div>
+    <% end %>
 
  
-  <%= f.input :content,
-              wrapper_html: { class: "content" } %>
-  
 
-  <div class="line-item__actions">
-   
-    <%= f.submit class: "btn btn--secondary" %>
-  </div>
-<% end %>
+
+
+
+
 
 

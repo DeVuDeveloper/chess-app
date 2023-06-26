@@ -1,4 +1,10 @@
-<%= turbo_stream.remove @chat %>
+<%= turbo_stream.remove 'chats', @chat  %>
+
+
+  
+
+
+
 <%= render_turbo_stream_flash_messages %>
 
 

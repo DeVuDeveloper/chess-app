@@ -1,21 +1,13 @@
 <%= turbo_stream.update nested_dom_id(@chat, Message.new), "" %>
 
+<%# Step 2: append the created line item to the list %>
 <%= turbo_stream.append nested_dom_id(@chat, "messages") do %>
-
-  <%= render partial: "message", locals: { user: @user, chat: @chat, message: @message } %>
-
+  <%= render @message, user: @user, chat: @chat %>
 <% end %>
 
-<%= turbo_stream.append "#{dom_id(@message.chat)}_messages" do %>
-  <%= render "message", message: @message, scroll_to: true %>
-<% end %>
-<%= turbo_stream.replace "#{dom_id(@message.chat)}_message_form" do %>
-  <%= render "messages/form", chat: @message.chat, user: @user, message: @message %>
-<% end %>
 
 
 <%= render_turbo_stream_flash_messages %>
-
  
 
 

@@ -1,4 +1,4 @@
-<%= simple_form_for [user, chat], html: { class: "form chat" } do |f| %>
+<%= simple_form_for [chat], html: { class: "form chat" }, data: { turbo_frame: "#{nested_dom_id(@chat, "messages")}"} do |f| %>
   <%= form_error_notification(chat) %>
   <%= f.submit class: "btn btn--secondary" %>
 <% end %>

@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_user, only: [:new, :create]
-  before_action :set_chat
+ 
   before_action :set_message, only: [:edit, :update, :destroy]
 
   def new
@@ -8,6 +8,8 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @chats = Chat.ordered
+    @chat = @chats.first
     @message = @chat.messages.build(message_params.merge(chat_id: params[:chat_id], role: "user"))
     GetAiResponseJob.perform_async(@message.chat_id)
 
@@ -58,7 +60,5 @@ class MessagesController < ApplicationController
     @user = current_user
   end
 
-  def set_chat
-    @chat = @user.chats.find(params[:chat_id])
-  end
+  
 end

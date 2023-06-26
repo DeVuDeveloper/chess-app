@@ -1,17 +1,11 @@
-<%= turbo_stream_from  "chats" %>
-  
-
- 
-
-     <%= render partial: "form", locals: { user: @user, chat: Chat.new } %>
- 
-
-
-  <%= turbo_frame_tag "chats" do %>
-    <%= render @chats, user: @user %>
-  
-  <% end %>
+<%= turbo_stream_from "chats" %>
 
 
 
-   
+
+<%= turbo_frame_tag "chats" do %>
+  <%= render @chats, user: @user %>
+<% end %>
+
+<%= render partial: "form", locals: { user: @user, chat: Chat.new } %>
+<%= render partial: "messages/form", locals: { user: @user, chat: @chat, message: Message.new } %>
