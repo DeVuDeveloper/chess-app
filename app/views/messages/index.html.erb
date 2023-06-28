@@ -5,7 +5,12 @@
   <div class="w-1/4 bg-gray-800 text-white p-4">
     <div class="mb-4 flex flex-col">
       <span>
-        <%= link_to "New Chat" %>
+     
+        <%= simple_form_for @chat, html: { class: "py-0" } do |f| %>
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+         
+          <%= f.submit "New Chat"%>
+        <% end %>
       </span>
     </div>
     <div class="flex flex-col">

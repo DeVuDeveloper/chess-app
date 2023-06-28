@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
     @message = Message.new
+    @chat = Chat.new
     @chats = Chat.all
     @chat_id = params[:chat_id] if params[:chat_id].present?
   end
