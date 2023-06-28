@@ -1,1 +1,3 @@
-<p><%= message.content %></p>
+<%= turbo_frame_tag message do %>
+  <p><%= message.content %></p>
+<% end %>

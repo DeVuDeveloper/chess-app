@@ -1,9 +1,4 @@
-<div id="chat_<%= chat.id %>">
-  <h3><%= chat.name %></h3>
-  <ul>
-    <% chat.messages.each do |message| %>
-      <li><%= message.content %></li>
-    <% end %>
-  </ul>
-</div>
+<%= turbo_frame_tag chat do %>
+  <p>* <%= chat.name %></p>
+<% end %>
 
