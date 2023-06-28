@@ -1,4 +1,4 @@
 <%= turbo_frame_tag chat do %>
-  <p>* <%= chat.name %></p>
+  <p>* <%= link_to chat.name, messages_path(chat_id: chat.id) %></p>
 <% end %>
 

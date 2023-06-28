@@ -1,34 +1,25 @@
 <%= turbo_stream_from "messages" %>
 
-
-
 <div class="flex h-screen">
   <div class="w-1/4 bg-gray-800 text-white p-4">
     <div class="mb-4 flex flex-col">
       <span>
-     
-        <%= simple_form_for @chat, html: { class: "py-0" } do |f| %>
-          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
-         
-          <%= f.submit "New Chat"%>
-        <% end %>
+        <%= link_to "New Chat", new_chat_messages_path %>
       </span>
     </div>
     <div class="flex flex-col">
-
       <%= turbo_frame_tag 'chats' do %>
-        <% render @chats %>
+        <%= render @chats %>
       <% end %>
     </div>
   </div>
   <div class="flex-1 p-4 flex flex-col">
     <div class="">
       <h2>Messages:</h2>
-      <%= turbo_stream_from "messages" %>
+       <%= turbo_frame_tag 'messages' do %>
       <div id="message-list">
-        <%= turbo_frame_tag 'messages' do %>
-          <%= render @messages %>
-        <% end %>
+        <%= render @messages %>
+         <% end %>
       </div>
     </div>
     <div class="fixed bottom-0 right-0 wide-full top-0">
@@ -36,3 +27,5 @@
     </div>
   </div>
 </div>
+
+<% console %>

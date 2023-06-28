@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   post "contact", to: "home#contact_create"
 
   resources :chats, only: [:index, :create]
-  resources :messages, only: [:index, :create]
+  resources :messages, only: [:index, :create] do
+    collection do
+      get :new_chat
+    end
+  end
  
  
 
