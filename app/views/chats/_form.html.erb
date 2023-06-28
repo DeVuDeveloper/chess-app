@@ -1,5 +1,11 @@
-<%= simple_form_for [chat], html: { class: "form chat" }, data: { turbo_frame: "#{nested_dom_id(@chat, "messages")}"} do |f| %>
-  <%= form_error_notification(chat) %>
-  <%= f.submit class: "btn btn--secondary" %>
+
+    <%= turbo_frame_tag "new_message_#{chat.id}" do %>
+      <%= form_with(model: Message.new, url: create_message_chats_path, id: "new-message-form-#{chat.id}", local: true) do |form| %>
+        <%= form.text_area :content, placeholder: 'Enter message' %>
+        <%= form.hidden_field :chat_id, value: chat.id %>
+        <%= form.submit 'Send' %>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 

@@ -1,64 +1,42 @@
 class MessagesController < ApplicationController
-  before_action :set_user, only: [:new, :create]
- 
-  before_action :set_message, only: [:edit, :update, :destroy]
-
-  def new
-    @message = @chat.messages.build
+  def index
+    @messages = Message.all
+    @message = Message.new
+    @chats = Chat.all
+    @chat_id = params[:chat_id] if params[:chat_id].present?
   end
 
   def create
-    @chats = Chat.ordered
-    @chat = @chats.first
-    @message = @chat.messages.build(message_params.merge(chat_id: params[:chat_id], role: "user"))
-    GetAiResponseJob.perform_async(@message.chat_id)
-
-    if @message.save
-      respond_to do |format|
-        format.html { redirect_to user_path(@user), notice: "Message was successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Message was successfully created." }
-      end
+    @message = current_user.messages.new(message_params)
+  
+    if session[:chat_id].nil?
+      @chat = Chat.create(name: @message.content[0, 10])
+      session[:chat_id] = @chat.id
     else
-      render :new, status: :unprocessable_entity
+      @chat = Chat.find_by(id: session[:chat_id])
+      @chat ||= Chat.create(name: @message.content[0, 10])
+      session[:chat_id] = @chat.id
     end
-  end
-
-  def edit
-  end
-
-  def update
-      if @message.update(message_params)
-        respond_to do |format|
-          format.html { redirect_to user_path(@user), notice: "Message was successfully updated." }
-          format.turbo_stream { flash.now[:notice] = "Message was successfully updated." }
-        end
-      else
-        render :edit, status: :unprocessable_entity
-      end
-  end
-
-  def destroy
-    @message.destroy
-    
+  
+    @message.chat_id = @chat.id
+  
     respond_to do |format|
-      format.html { redirect_to user_path(@user), notice: "Chat was successfully destroyed." }
-      format.turbo_stream { flash.now[:notice] = "Chat was successfully destroyed." }
+      if @message.save
+        format.html { redirect_to messages_path, notice: "Message was successfully created." }
+        format.turbo_stream
+      else
+        format.html { redirect_to messages_path, alert: "Message could not be created." }
+      end
     end
   end
+  
+  
+  
 
   private
 
-  def set_message
-    @message = @chat.messages.find(params[:id])
-  end
-
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :user_id, :chat_id)
   end
-
-  def set_user
-    @user = current_user
-  end
-
   
 end

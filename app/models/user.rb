@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_many :user_games
     has_many :games, through: :user_games
     has_many :chats, dependent: :destroy
-    has_many :messages, through: :chats
+    has_many :messages, dependent: :destroy
 
     validates :email, presence: true, uniqueness: true
 

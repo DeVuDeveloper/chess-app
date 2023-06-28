@@ -1,68 +1,25 @@
+# app/controllers/chats_controller.rb
 class ChatsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_user
-  before_action :set_chat, only: [:edit, :update, :destroy]
-
   def index
-    @chats = @user.chats.ordered
-    @chat = @chats.first
-    @user = current_user
-  end
-
-  def new
-    @chat = @user.chats.build
+    @chats = Chat.includes(:messages).all
+    @new_message = Message.new
   end
 
   def create
-    @chat = @user.chats.build(user_id: @user.id)
-
-    if @chat.save
+    @new_chat = Chat.new(chat_params)
+    if @new_chat.save
+      @new_chat.messages.create(content: "Welcome to the chat!")
       respond_to do |format|
-        format.html { redirect_to user_chats_path(@user), notice: "Chat was successfully created." }
-        format.turbo_stream { flash.now[:notice] = "Chat was successfully created." }
+        format.js { render js: "window.location.reload();" }
       end
     else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def edit
- 
-  end
-
-  def update
-   
-
-    if @chat.update(user_id: @user.id)
-      respond_to do |format|
-        format.html { redirect_to user_path(@user), notice: "Chat was successfully updated." }
-        format.turbo_stream { flash.now[:notice] = "Chat was successfully updated." }
-      end
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @chat.destroy
-
-    respond_to do |format|
-      format.html { redirect_to user_path(@user), notice: "Chat was successfully destroyed." }
-      format.turbo_stream { flash.now[:notice] = "Chat was successfully destroyed." }
+      # Handle the case when chat creation fails
     end
   end
 
   private
 
-  def set_chat
-    @chat = @user.chats.find(params[:id])
-  end
-
   def chat_params
-    params.require(:chat).permit(:user_id)
-  end
-
-  def set_user
-    @user = current_user
+    params.require(:chat).permit(:name, )
   end
 end

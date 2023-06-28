@@ -1,13 +1,5 @@
-<%= turbo_stream.update nested_dom_id(@chat, Message.new), "" %>
+<%= turbo_stream.prepend "messages", @message %>
 
-<%# Step 2: append the created line item to the list %>
-<%= turbo_stream.append nested_dom_id(@chat, "messages") do %>
-  <%= render @message, user: @user, chat: @chat %>
-<% end %>
-
-
-
-<%= render_turbo_stream_flash_messages %>
  
 
 

@@ -10,11 +10,9 @@ Rails.application.routes.draw do
   get "contact", to: "home#contact_new"
   post "contact", to: "home#contact_create"
 
-  resources :chats do
-    resources :messages, except: [:index, :show]
-  end
-  
-  resources :messages, only: [:create]
+  resources :chats, only: [:index, :create]
+  resources :messages, only: [:index, :create]
+ 
  
 
   mount Sidekiq::Web => "/sidekiq"

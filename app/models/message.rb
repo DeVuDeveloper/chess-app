@@ -1,39 +1,15 @@
+# app/models/message.rb
 class Message < ApplicationRecord
-  include ActionView::RecordIdentifier
+  belongs_to :chat, optional: true
+  belongs_to :user
 
-  enum role: { system: 0, assistant: 10, user: 20 }
+  broadcasts_to ->(message) { "messages" }, inserts_by: :prepend
 
-  belongs_to :chat
-  delegate :user, to: :chat
+  validate :chat_must_exist
 
-  after_create_commit -> { broadcast_created }
-  after_update_commit -> { broadcast_updated }
+  private
 
-  
-  def broadcast_created
-    broadcast_append_later_to(
-      "#{dom_id(chat)}_messages",
-      partial: "messages/message",
-      locals: { message: self, scroll_to: true },
-      target: "#{dom_id(chat)}_messages"
-    )
-  end
-
-  def broadcast_updated
-    broadcast_append_to(
-      "#{dom_id(chat)}_messages",
-      partial: "messages/message",
-      locals: { message: self, scroll_to: true },
-      target: "#{dom_id(chat)}_messages"
-    )
-  end
-
-  def self.for_openai(messages)
-    messages.map { |message| { role: message.role, content: message.content } }
-  end
-
-
-  def assistant_message?
-    role == "assistant"
+  def chat_must_exist
+    errors.add(:chat, "must exist") unless chat.present?
   end
 end
