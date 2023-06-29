@@ -1,10 +1,27 @@
 class MessagesController < ApplicationController
-  
+
+
   def index
-    @messages = Message.where(chat_id: session[:chat_id])
     @message = Message.new
     @chats = Chat.all
     @chat_id = params[:chat_id] if params[:chat_id].present?
+  
+    # Add this code to filter messages for the selected chat
+    if @chat_id.present?
+      @messages = Message.where(chat_id: @chat_id)
+    else
+      @messages = []
+    end
+  end
+
+  def new_chat
+    @chat = Chat.new
+    session[:chat_id] = @chat.id
+  
+    respond_to do |format|
+      format.html { redirect_to messages_path(chat_id: @chat.id) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("message-list", "") }
+    end
   end
 
 
@@ -36,15 +53,7 @@ class MessagesController < ApplicationController
     end
   end
 
-  def new_chat
-    @chat = Chat.new
-    session[:chat_id] = @chat.id
-  
-    respond_to do |format|
-      format.html { redirect_to messages_path(chat_id: @chat.id) }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("message-list", "") }
-    end
-  end
+
 
   private
 

@@ -16,10 +16,11 @@
   <div class="flex-1 p-4 flex flex-col">
     <div class="">
       <h2>Messages:</h2>
-       <%= turbo_frame_tag 'messages' do %>
-      <div id="message-list">
-        <%= render @messages %>
-         <% end %>
+      <%= turbo_frame_tag 'messages' do %>
+  <div id="message-list">
+    <%= render @messages %>
+  </div>
+<% end %>
       </div>
     </div>
     <div class="fixed bottom-0 right-0 wide-full top-0">
@@ -28,4 +29,4 @@
   </div>
 </div>
 
-<% console %>
+
