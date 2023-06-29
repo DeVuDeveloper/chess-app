@@ -35,10 +35,17 @@ class ChatsController < ApplicationController
   end
 
   def destroy
+    @chat = Chat.find(params[:id])
     @chat.destroy
+  
     respond_to do |format|
       format.html { redirect_to messages_path, notice: "Chat was successfully destroyed." }
-      format.turbo_stream
+      format.turbo_stream do
+        ActionCable.server.broadcast "messages",
+          turbo_stream.remove(@chat)
+  
+        render turbo_stream: turbo_stream.remove(@chat)
+      end
     end
   end
 

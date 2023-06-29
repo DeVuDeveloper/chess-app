@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "contact", to: "home#contact_new"
   post "contact", to: "home#contact_create"
 
-  resources :chats, only: [:index, :create]
+  resources :chats
   resources :messages, only: [:index, :create] do
     collection do
       get :new_chat

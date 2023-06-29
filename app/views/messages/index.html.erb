@@ -1,10 +1,12 @@
 <%= turbo_stream_from "messages" %>
-
 <div class="flex h-screen">
   <div class="w-1/4 bg-gray-800 text-white p-4">
     <div class="mb-4 flex flex-col">
-      <span>
-        <%= link_to "New Chat", new_chat_messages_path %>
+      <span class="border border-slate-400 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24">
+          <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
+        </svg>
+        <%= link_to "New Chat", new_chat_messages_path, class: "ml-2" %>
       </span>
     </div>
     <div class="flex flex-col">
@@ -15,18 +17,15 @@
   </div>
   <div class="flex-1 p-4 flex flex-col">
     <div class="">
-      <h2>Messages:</h2>
       <%= turbo_frame_tag 'messages' do %>
-  <div id="message-list">
-    <%= render @messages %>
+        <div id="message-list">
+          <%= render @messages %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-      </div>
-    </div>
-    <div class="fixed bottom-0 right-0 wide-full top-0">
-      <%= render 'form', message: @message %>
-    </div>
+  <div class="fixed bottom-0 right-0 wide-full top-0">
+    <%= render 'form', message: @message %>
   </div>
 </div>
-
-
+</div>
