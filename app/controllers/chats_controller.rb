@@ -1,61 +1,40 @@
 class ChatsController < ApplicationController
-  before_action :set_chat, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @chats = Chat.ordered
-  end
-
-  def show
+    @chats = Chat.all
+    @chat = Chat.new
   end
 
   def new
     @chat = Chat.new
+    @chats = Chat.all
   end
 
   def create
-    @chat = current_user.chats.create!(chat_params)
+    @chat = Chat.new(user_id: current_user.id)
 
     if @chat.save
       respond_to do |format|
-        format.html { redirect_to messages_path, notice: "Chat was successfully created." }
+        format.html { redirect_to chat_path(@chat), notice: "Chat was successfully created." }
+
         format.turbo_stream
       end
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @chat.update(chat_params)
-      redirect_to messages_path, notice: "chat was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @chat = Chat.find(params[:id])
     @chat.destroy
-  
     respond_to do |format|
-      format.html { redirect_to messages_path, notice: "Chat was successfully destroyed." }
-      format.turbo_stream do
-        ActionCable.server.broadcast "messages",
-          turbo_stream.remove(@chat)
-  
-        render turbo_stream: turbo_stream.remove(@chat)
-      end
+      format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
+      format.turbo_stream 
     end
   end
 
   private
 
-  def set_chat
-    @chat = Chat.find(params[:id])
-  end
-
   def chat_params
-    params.require(:chat).permit(:name, :user_id)
+    params.require(:chat).permit(:user_id)
   end
 end
