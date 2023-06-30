@@ -17,7 +17,6 @@ class ChatsController < ApplicationController
     if @chat.save
       respond_to do |format|
         format.html { redirect_to chat_path(@chat), notice: "Chat was successfully created." }
-
         format.turbo_stream
       end
     end
@@ -37,4 +36,24 @@ class ChatsController < ApplicationController
   def chat_params
     params.require(:chat).permit(:user_id)
   end
+end
+
+class MessagesController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    @chats = Chat.all.order(created_at: :desc)
+
+    @message = Message.new
+    
+    if params[:chat_id].present?
+      @chat = Chat.find_by(id: params[:chat_id])
+      @messages = @chat ? @chat.messages.order(created_at: :asc) : []
+    else
+      @chat = nil
+      @messages = []
+    end
+  end
+
+  # Ostatak kontrolera...
 end
