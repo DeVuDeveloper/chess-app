@@ -16,44 +16,23 @@ class ChatsController < ApplicationController
 
     if @chat.save
       respond_to do |format|
-        format.html { redirect_to chat_path(@chat), notice: "Chat was successfully created." }
+        format.html { redirect_to chat_path(@chat.id), notice: "Chat was successfully created." }
         format.turbo_stream
       end
     end
   end
 
   def destroy
-    @chat = Chat.find(params[:id])
-    @chat.destroy
-    respond_to do |format|
-      format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
-      format.turbo_stream 
-    end
-  end
+    @chat = Chat.find_by(id: params[:id])
 
-  private
-
-  def chat_params
-    params.require(:chat).permit(:user_id)
-  end
-end
-
-class MessagesController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
-    @chats = Chat.all.order(created_at: :desc)
-
-    @message = Message.new
-    
-    if params[:chat_id].present?
-      @chat = Chat.find_by(id: params[:chat_id])
-      @messages = @chat ? @chat.messages.order(created_at: :asc) : []
+    if @chat
+      @chat.destroy
+      respond_to do |format|
+        format.html { redirect_to chats_path, notice: "Chat was successfully destroyed." }
+        format.turbo_stream
+      end
     else
-      @chat = nil
-      @messages = []
+      redirect_to chats_path, alert: "Chat not found."
     end
   end
-
-  # Ostatak kontrolera...
 end
