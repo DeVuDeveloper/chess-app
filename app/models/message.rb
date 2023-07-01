@@ -10,7 +10,8 @@ class Message < ApplicationRecord
 
   broadcasts_to ->(message) { "messages" }, inserts_by: :append
 
-
+  after_create_commit -> { broadcast_created }
+  after_update_commit -> { broadcast_updated }
 
   validate :chat_must_exist
 

@@ -2,16 +2,9 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @message = Message.new
     @chats = Chat.all.order(created_at: :desc)
-  
-    if session[:chat_id].present?
-      @chat = Chat.find_by(id: session[:chat_id])
-      @messages = @chat ? @chat.messages : []
-    else
-      @chat = nil
-      @messages = []
-    end
+    @message = Message.new
+    @messages = Message.where(chat_id: params[:chat_id]).order(created_at: :asc)
   end
   
   def create
@@ -30,18 +23,17 @@ class MessagesController < ApplicationController
       @message.chat_id = @chat.id
       @message.role = "user"
   
-      # Update the chat name based on the latest message content
       @chat.update(name: @message.content&.slice(0, 10))
   
-      respond_to do |format|
-        if @message.save
-          GetAiResponseJob.perform_async(@message.chat_id)
-          format.html { redirect_to messages_path, notice: "Message was successfully created." }
-          format.turbo_stream
-        else
-          format.html { redirect_to messages_path, alert: "Message could not be created." }
-        end
-      end
+       
+          if @message.save
+            GetAiResponseJob.perform_async(@message.chat_id)
+
+            respond_to do |format|
+              format.html { redirect_to message_path(@message), notice: "message was successfully created." }
+              format.turbo_stream
+            end
+          end
     end
   end
 
