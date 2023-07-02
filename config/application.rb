@@ -13,7 +13,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "rails/test_unit/railtie"
-
+require 'kramdown'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -27,6 +27,8 @@ module ChessApp
     config.eager_load_paths << root.join("lib")
     # config/application.rb
     config.autoload_paths += %W(#{config.root}/app/jobs)
+    config.autoload_paths += %W[#{config.root}/app/operations]
+
 
 
     config.i18n.available_locales = [:en, :sr]

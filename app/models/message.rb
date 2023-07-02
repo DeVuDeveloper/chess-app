@@ -16,26 +16,20 @@ class Message < ApplicationRecord
   validate :chat_must_exist
 
   def broadcast_created
-    target = "#{dom_id(chat)}_messages"
-    puts "Broadcasting 'append' action to #{target} with partial 'messages/message'"
-
     broadcast_append_later_to(
-      target,
+      "#{dom_id(chat)}_messages",
       partial: "messages/message",
       locals: { message: self, scroll_to: true },
-      target: target
+      target: "#{dom_id(chat)}_messages"
     )
   end
 
   def broadcast_updated
-    target = "#{dom_id(chat)}_messages"
-    puts "Broadcasting 'append' action to #{target} with partial 'messages/message'"
-
     broadcast_append_to(
-      target,
+      "#{dom_id(chat)}_messages",
       partial: "messages/message",
       locals: { message: self, scroll_to: true },
-      target: target
+      target: "#{dom_id(chat)}_messages"
     )
   end
 

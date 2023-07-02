@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
        
           if @message.save
             GetAiResponseJob.perform_async(@message.chat_id)
+            @message.broadcast_created
 
             respond_to do |format|
               format.html { redirect_to message_path(@message), notice: "message was successfully created." }
@@ -42,7 +43,7 @@ class MessagesController < ApplicationController
   
     respond_to do |format|
       format.html { redirect_to messages_path(chat_id: @chat.id) }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("message-list", "") }
+      format.turbo_stream
     end
   end
 

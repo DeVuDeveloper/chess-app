@@ -34,7 +34,7 @@
             </div>
             <% if content_parts.size > 2 %>
               <div class="px-4 rounded-b-md">
-                <%= content_parts[2..-1].join('') %>
+                <%= render_markdown(content_parts[2..-1].join('')) %>
               </div>
             <% end %>
           </div>
@@ -77,4 +77,3 @@
     <% end %>
   </div>
 <% end %>
-

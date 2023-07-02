@@ -4,7 +4,7 @@
       <%= form.text_field :content, class: "w-full border-gray-300 rounded-l-lg py-2 px-4", placeholder: "Type your message..."%>
     </div>
     <div class="p-8">
-      <%= form.button raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg" %>
+      <%= form.button raw('<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg", data: { turbo_frame: "messages" } %>
     </div>
   <% end %>
 </div>

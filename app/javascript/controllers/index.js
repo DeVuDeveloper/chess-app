@@ -4,11 +4,11 @@
 
 import { application } from "./application"
 
+import AutoScrollController from "./auto_scroll_controller"
+application.register("autoscroll", AutoScrollController)
+
+import MessagesController from "./messages_controller"
+application.register("messages", MessagesController)
+
 import RemovalsController from "./removals_controller"
 application.register("removals", RemovalsController)
-
-
-
-Turbo.setProgressBarDelay(0);
-
-

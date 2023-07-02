@@ -1,3 +1,4 @@
+
 module ApplicationHelper
 
   def render_turbo_stream_flash_messages
@@ -14,5 +15,10 @@ module ApplicationHelper
 
   def nested_dom_id(*args)
     args.map { |arg| arg.respond_to?(:to_key) ? dom_id(arg) : arg }.join("_")
+  end
+
+
+  def render_markdown(content)
+    Kramdown::Document.new(content).to_html.html_safe
   end
 end
