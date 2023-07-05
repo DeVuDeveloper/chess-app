@@ -4,21 +4,30 @@ export default class extends Controller {
   static targets = ["messages"];
 
   connect() {
-    console.log("connected");
-    this.scrollBottom();
+    console.log("Connected to Stimulus controller.");
+    this.scrollToBottom();
   }
 
   appendMessage(event) {
+    console.log("Append message event fired.");
     const message = event.detail.templateElement.content.firstElementChild;
     this.messagesTarget.appendChild(message);
-    this.scrollBottom();
+    this.scrollToBottom();
+    console.log("Message appended to DOM.");
   }
 
-  scrollBottom() {
-    if (this.messagesTarget) {
+  scrollToBottom() {
+    console.log("Scrolling to bottom.");
+    if (this.hasMessagesTarget) {
       this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight;
     }
   }
 }
+
+
+
+
+
+
 
 

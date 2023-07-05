@@ -1,4 +1,4 @@
-<%= turbo_stream.append "messages", @message %>
+<%= turbo_stream.append "messages", @message, scroll_to: true %>
 <%= turbo_stream.append "chats", @chat %>
 
 

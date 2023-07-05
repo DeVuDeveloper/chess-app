@@ -1,5 +1,6 @@
+ 
 <div class="fixed bottom-0 mb-4" style="position: fixed; bottom: 0; right: 20px; left: 370px;">
- <%= form_with(model: @message, url: messages_path, local: true, class: "flex items-center", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset", turbo_frame: "messages" }) do |form| %>
+  <%= form_with(model: @message, url: messages_path, local: true, class: "flex items-center", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset", turbo_frame: "messages" }) do |form| %>
     <!-- Form fields -->
     <div class="flex-1">
       <%= form.text_field :content, class: "w-full border-gray-300 rounded-l-lg py-2 px-4", placeholder: "Type your message..."%>
