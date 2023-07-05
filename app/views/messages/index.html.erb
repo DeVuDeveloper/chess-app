@@ -17,19 +17,25 @@
     </div>
   </div>
   <div class="flex-1 p-4 flex flex-col">
-
     <%= turbo_frame_tag "messages" do %>
-      <div id="message-list" class="chat-messages-scroll" style="overflow-y: auto; max-height: calc(100vh - 16rem);" >
-        <%= render @messages %>
-      </div>
-    <% end %>
+<div id="messages" class="chat-messages-scroll" style="overflow-y: auto; max-height: calc(100vh - 16rem);"
+  data-controller="scroll"
+  data-scroll-target="messages">
+  <%= render @messages %>
+</div>
 
+    <% end %>
     <div class="">
       <%= render 'form', message: @message %>
     </div>
-
   </div>
 </div>
+
+
+
+
+
+
 
 
 

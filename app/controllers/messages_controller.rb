@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
        
           if @message.save
             GetAiResponseJob.perform_async(@message.chat_id)
-            @message.broadcast_created
+         
 
             respond_to do |format|
               format.html { redirect_to message_path(@message), notice: "message was successfully created." }

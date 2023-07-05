@@ -11,7 +11,7 @@ class GetAiResponseJob < SidekiqJob
 
   def call_openai(chat:)
     message = chat.messages.create(role: "assistant", content: "Waiting for response...")
-    message.broadcast_created
+   
 
     openai_client = OpenAI::Client.new(access_token: "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")
 
@@ -30,7 +30,7 @@ class GetAiResponseJob < SidekiqJob
     new_content = response.dig("choices", 0, "message", "content")
     if new_content.present?
       message.update(content: new_content)
-      message.broadcast_created
+      
     end
   end
 end
