@@ -17,14 +17,11 @@
     </div>
   </div>
   <div class="flex-1 p-4 flex flex-col">
-    <%= turbo_frame_tag "messages", 'data-scroll-autoblock': 'end' do %>
-<div id="messages" class="chat-messages-scroll"
-  data-controller="scroll"
-  data-scroll-target="messages">
-  <%= render @messages %>
-</div>
-
-    <% end %>
+  <%= turbo_frame_tag "messages", data: { controller: "scroll" } do %>
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+<% end %>
     <div class="">
       <%= render 'form', message: @message , data: { turbo_frame: 'messages'} %>
     </div>
