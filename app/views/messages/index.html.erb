@@ -1,18 +1,35 @@
 <%= turbo_stream_from "chats" %>
 <%= turbo_stream_from "messages" %>
+<%= turbo_stream_from "images" %>
 <div class="flex">
-  <div class="h-screen w-1/4 bg-gray-800 text-white p-4">
+  <div class="h-screen w-1/4 bg-gray-800 p-4">
+
     <div class="mb-4 flex flex-col">
-      <span class="border border-slate-400 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-gray-700">
+
+      <span class="border border-slate-400 rounded-lg px-4 py-2 mb-4 flex items-center justify-center hover:bg-gray-700">
         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24">
           <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
         </svg>
-        <%= link_to "New Chat", new_chat_messages_path, class: "ml-2", turbo_stream: true %>
+        <%= link_to "New Chat", new_chat_messages_path, class: "ml-2 text-white", turbo_stream: true %>
       </span>
+
+       <span class="border border-slate-400 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24">
+          <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
+        </svg>
+
+        <%= link_to "New Image", new_image_path, data: { turbo_frame: dom_id(Image.new) }, class: "ml-2 text-white" %>
+         <%= turbo_frame_tag Image.new %>
+      </span>
+      
     </div>
     <div class="flex flex-col">
       <%= turbo_frame_tag 'chats' do %>
         <%= render @chats %>
+      <% end %>
+
+      <%= turbo_frame_tag 'images' do %>
+        <%= render @images %>
       <% end %>
     </div>
   </div>
@@ -27,3 +44,4 @@
     </div>
   </div>
 </div>
+

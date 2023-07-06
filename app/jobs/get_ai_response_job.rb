@@ -26,6 +26,7 @@ class GetAiResponseJob < SidekiqJob
     new_content = response.dig("choices", 0, "message", "content")
     if new_content.present?
       message.update(content: new_content, loader: false)
+
     end
   end
 end
