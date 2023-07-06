@@ -26,6 +26,6 @@ export default class extends Controller {
       if (currentIndex > this.originalText.length) {
         clearInterval(typingInterval);
       }
-    }, 100);
+    }, 10);
   }
 }

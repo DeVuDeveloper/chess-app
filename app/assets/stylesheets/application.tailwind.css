@@ -26,3 +26,13 @@
     opacity: 0;
   }
 }
+
+.dark {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 10px;
+  /* Dodatni stilovi codema potrebi */
+}
+
+
+

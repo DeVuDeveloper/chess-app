@@ -21,4 +21,20 @@ module ApplicationHelper
   def render_markdown(content)
     Kramdown::Document.new(content).to_html.html_safe
   end
+
+  def highlight_code(code, language = 'html')
+    formatter = Rouge::Formatters::HTMLLegacy.new(css_class: 'highlight')
+    lexer = Rouge::Lexer.find(language) || Rouge::Lexers::PlainText
+    highlighted_code = formatter.format(lexer.lex(code))
+    "<pre>#{highlighted_code}</pre>".html_safe
+  end
+
+  def render_markdown_with_code_highlighting(content)
+    highlighted_content = content.gsub(/```([\s\S]*?)```/m) do
+      code_block = $1
+      "<pre class='dark'>#{code_block}</pre>"
+    end
+
+    render_markdown(highlighted_content)
+  end
 end

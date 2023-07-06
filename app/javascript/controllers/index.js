@@ -4,8 +4,7 @@
 
 import { application } from "./application"
 
-import LoaderController from "./loader_controller"
-application.register("loader", LoaderController)
+
 
 import RemovalsController from "./removals_controller"
 application.register("removals", RemovalsController)

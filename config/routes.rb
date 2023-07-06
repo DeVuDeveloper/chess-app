@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     end
   end
  
- 
+  get '/dist/onig.wasm', to: redirect('/shiki/onig.wasm')
+
+  # Ruta za nord.json datoteku
+  get '/themes/nord.json', to: redirect('/shiki/themes/nord.json')
 
   mount Sidekiq::Web => "/sidekiq"
 end
