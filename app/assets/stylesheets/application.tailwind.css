@@ -6,3 +6,23 @@
   overflow-y: auto;
   max-height: calc(100vh - 16rem);
 }
+
+.typing-loader {
+  display: inline-block;
+  width: 7px;
+  height: 16px;
+  background-color: #000;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

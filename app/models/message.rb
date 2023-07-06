@@ -9,6 +9,7 @@ class Message < ApplicationRecord
 
   scope :ordered, -> { order(id: :desc) }
 
+
   def self.for_openai(messages)
     messages.map { |message| { role: message.role, content: message.content } }
   end
@@ -16,6 +17,7 @@ class Message < ApplicationRecord
   def assistant_message?
     role == "assistant"
   end
+
 
   private
 
