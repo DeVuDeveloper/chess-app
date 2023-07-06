@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
     @chats = Chat.all.order(created_at: :desc)
     @message = Message.new
     @messages = Message.where(chat_id: params[:chat_id]).order(created_at: :asc)
+    mark_messages_as_viewed(@messages)
   end
   
   def create
@@ -52,6 +53,12 @@ class MessagesController < ApplicationController
   def initialize_chat
     @chat = Chat.create!(user_id: current_user.id)
     session[:chat_id] = @chat.id
+  end
+
+  def mark_messages_as_viewed(messages)
+    messages.each do |message|
+      message.update(viewed: true) unless message.viewed?
+    end
   end
 
   def message_params

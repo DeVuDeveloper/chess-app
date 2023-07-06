@@ -12,3 +12,6 @@ application.register("reset-form", ResetFormController)
 
 import ScrollController from "./scroll_controller"
 application.register("scroll", ScrollController)
+
+import TypingController from "./typing_controller"
+application.register("typing", TypingController)
