@@ -1,0 +1,13 @@
+<h1>Upload MIDI fajla</h1>
+<%= form_tag(midi_path, method: :post, multipart: true) do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Upload' %>
+<% end %>
+
+<h1>Reprodukuj MIDI fajl</h1>
+<%= button_to 'Reprodukuj', midi_play_path, method: :post %>
+
+
+
+
+

@@ -77,6 +77,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    alsa-rawmidi (0.4.0)
+      ffi (~> 1.15, >= 1.15.5)
     arbre (1.6.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -131,6 +133,8 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
+    ffi-coremidi (0.5.1)
+      ffi (~> 1.15, >= 1.15.5)
     formatador (1.1.0)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
@@ -211,6 +215,10 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    midi-jruby (0.2.0)
+    midi-winmm (0.1.10)
+      ffi (>= 1.0)
+    midilib (4.0.0)
     mini_mime (1.1.2)
     minitest (5.18.1)
     msgpack (1.7.1)
@@ -238,6 +246,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
+    pp (0.4.0)
+      prettyprint
+    prettyprint (0.1.1)
     propshaft (0.7.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -377,6 +388,11 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    unimidi (0.5.1)
+      alsa-rawmidi (~> 0.4, >= 0.4.0)
+      ffi-coremidi (~> 0.5, >= 0.5.1)
+      midi-jruby (~> 0.2, >= 0.2.0)
+      midi-winmm (~> 0.1, >= 0.1.10)
     view_component (3.3.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
@@ -417,7 +433,9 @@ DEPENDENCIES
   jsbundling-rails
   kramdown
   letter_opener
+  midilib
   pg (~> 1.1)
+  pp
   propshaft
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
@@ -434,6 +452,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  unimidi
   view_component
   web-console
   webdrivers

@@ -14,7 +14,9 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "rails/test_unit/railtie"
 require 'kramdown'
-
+require 'pp'
+require "unimidi"
+require 'midilib/sequence'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -30,11 +32,14 @@ module ChessApp
     config.autoload_paths += %W(#{config.root}/app/jobs)
     config.autoload_paths += %W[#{config.root}/app/operations]
 
+    config.action_controller.default_protect_from_forgery = true
+
 
 
     config.i18n.available_locales = [:en, :sr]
     config.i18n.default_locale = :en
     config.active_job.queue_adapter = :sidekiq
+
 
 
     # Configuration for the application, engines, and railties goes here.

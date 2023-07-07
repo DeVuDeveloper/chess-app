@@ -19,5 +19,9 @@ Rails.application.routes.draw do
  
   resources :images
 
+  post '/midi', to: 'midi#create', as: 'midi'
+  get '/midi/play', to: 'midi#play', as: 'midi_play'
+  post '/midi/play', to: 'midi#play'
+
   mount Sidekiq::Web => "/sidekiq"
 end
