@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   get '/midi/play', to: 'midi#play', as: 'midi_play'
   post '/midi/play', to: 'midi#play'
 
+
   mount Sidekiq::Web => "/sidekiq"
 end
