@@ -18,7 +18,6 @@ class Message < ApplicationRecord
     role == "assistant"
   end
 
-
   private
 
   def chat_must_exist

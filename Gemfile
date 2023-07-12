@@ -83,9 +83,8 @@ gem "ruby-openai", "~> 4.0.0"
 gem 'kramdown'
 gem 'guard-livereload', '~> 2.5', require: false
 gem 'rouge'
-gem 'midilib'
-gem 'unimidi'
-gem 'pp'
+gem "image_processing", ">= 1.2"
+
 
 
 

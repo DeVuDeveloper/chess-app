@@ -1,0 +1,21 @@
+<%= turbo_stream_from "sounds" %>
+<section class="bg-gray-100">
+  <div class="mx-auto max-w-screen-xl px-4 mt-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <%= image_tag "chess.png", alt: "Chess Image", class: "rounded-lg shadow-md" %>
+      </div>
+      <div class="flex flex-col overflow-auto">
+        <div class="flex justify-center text-center  ">
+          <%= link_to "Create New Sound", new_sound_path,  data: { turbo_frame: dom_id(Sound.new) }, class: "btn btn--primary w-full py-3 px-6 text-white font-semibold rounded-lg shadow-md bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+        </div>
+        <%= turbo_frame_tag Sound.new %>
+        <%= turbo_frame_tag "sounds" do %>
+          <div class="bg-gray-800">
+            <%= render @sounds %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -7,6 +7,8 @@ class MessagesController < ApplicationController
     @messages = Message.where(chat_id: params[:chat_id]).order(created_at: :asc)
     mark_messages_as_viewed(@messages)
     @images = Image.all
+    @sounds = Sound.all
+   
   end
   
   def create

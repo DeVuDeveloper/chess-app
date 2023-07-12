@@ -34,5 +34,27 @@
   /* Dodatni stilovi codema potrebi */
 }
 
+.audio-container audio {
+  /* Your audio tag styles here */
+  width: 90%;
+  border: 1px solid #2e2929;
+
+  /* ... */
+}
+
+.audio-container canvas {
+  /* Your canvas styles here */
+  width: 100%;
+  height: 100px;
+  /* ... */
+}
+
+
+
+
+
+
+
+
 
 

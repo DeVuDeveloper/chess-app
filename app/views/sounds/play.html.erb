@@ -1,0 +1,12 @@
+<%= form_with(model: @music) do |form| %>
+  <%= form.file_field :file %>
+  <%= form.submit 'Upload' %>
+<% end %>
+
+<% if @wav_file_url %>
+    <%= audio_tag @wav_file_url, controls: true %>
+  <% else %>
+    <p>No WAV file found for playback.</p>
+  <% end %>
+
+

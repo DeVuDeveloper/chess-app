@@ -4,8 +4,6 @@
 
 import { application } from "./application"
 
-
-
 import RemovalsController from "./removals_controller"
 application.register("removals", RemovalsController)
 
@@ -17,3 +15,6 @@ application.register("scroll", ScrollController)
 
 import TypingController from "./typing_controller"
 application.register("typing", TypingController)
+
+import WaveController from "./wave_controller"
+application.register("wave", WaveController)

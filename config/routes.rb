@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
- 
   
   root "home#index"
   resources :games
@@ -19,9 +18,7 @@ Rails.application.routes.draw do
  
   resources :images
 
-  post '/midi', to: 'midi#create', as: 'midi'
-  get '/midi/play', to: 'midi#play', as: 'midi_play'
-  post '/midi/play', to: 'midi#play'
+  resources :sounds
 
 
   mount Sidekiq::Web => "/sidekiq"
