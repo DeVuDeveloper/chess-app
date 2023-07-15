@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
  
-  resources :images
+  resources :aimages
 
   resources :sounds
 

@@ -42,6 +42,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_010544) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "aimages", force: :cascade do |t|
+    t.string "prompt"
+    t.string "size"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "chats", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
@@ -56,14 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_010544) do
     t.integer "winner_user_id"
     t.integer "loser_user_id"
     t.integer "turn_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "prompt"
-    t.string "size"
-    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

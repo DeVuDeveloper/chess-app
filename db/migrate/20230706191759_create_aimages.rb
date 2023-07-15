@@ -1,6 +1,6 @@
-class CreateImages < ActiveRecord::Migration[7.0]
+class CreateAimages < ActiveRecord::Migration[7.0]
   def change
-    create_table :images do |t|
+    create_table :aimages do |t|
       t.string :prompt
       t.string :size
       t.string :url
