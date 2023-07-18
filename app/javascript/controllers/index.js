@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChessController from "./chess_controller"
+application.register("chess", ChessController)
+
 import RemovalsController from "./removals_controller"
 application.register("removals", RemovalsController)
 

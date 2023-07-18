@@ -1,0 +1,14 @@
+<%= turbo_frame_tag game do %>
+
+<div id="<%= dom_id game %>">
+  <div class="row">
+    <div class="col-8">
+      <%= render partial: "games/board", locals: {game:game} %>
+    </div>
+    <div class="col-4" style="display: none;">
+      <%= render partial: "games/pgn", locals: {game:game} %>
+    </div>
+  </div>
+</div>
+
+<% end %>

@@ -1,19 +1,52 @@
 class Game < ApplicationRecord
-  has_many :user_games
+  has_many :user_games, dependent: :destroy
   has_many :users, through: :user_games
 
+  enum state: { in_progress: 0, checkmate: 1, draw: 2 }
+  enum turns: { white: 0, black: 1 }
 
-  scope :ordered, -> { order(id: :desc) }
+  before_create :set_fen
+  before_create :set_pgn
 
   broadcasts_to ->(game) { "games" }, inserts_by: :prepend
 
-  def white_player
-    User.find_by_id(white_player_user_id)
+  def set_fen
+    turn_abbreviation = if turn == 'white'
+                          'w'
+                        else
+                          'b'
+                        end
+
+    self.fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR #{turn_abbreviation} KQkq - 0 1"
   end
 
-  def black_player
-    User.find_by_id(black_player_user_id)
+  def set_pgn
+    self.pgn =
+'
+[Event "Casual Game"]
+[Site "Localhost"]
+[Date "01/20/23"]
+[EventDate "?"]
+[Round "?"]
+[Result "1-0"]
+[White "?"]
+[Black "?"]
+[ECO "?"]
+[WhiteElo "?"]
+[BlackElo "?"]
+[PlyCount "?"]
+'
   end
 
+  # used to rotate board for black player
+  def orientation(user)
+    if white_player_id == user.id
+      'white'
+    else
+      'black'
+    end
+  end
 end
+
+
   

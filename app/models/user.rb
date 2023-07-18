@@ -11,5 +11,9 @@ class User < ApplicationRecord
 
     validates :email, presence: true, uniqueness: true
 
-    
+    def game_in_progress_with(target_user)
+      games
+        .where(id: target_user.games)
+        .where(state: :in_progress)
+    end
 end

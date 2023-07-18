@@ -23,6 +23,8 @@ module ChessApp
     }
 
 
+    config.assets.paths << Rails.root.join("app", "assets", "images")
+
 
     config.i18n.available_locales = [:en, :sr]
     config.i18n.default_locale = :en
