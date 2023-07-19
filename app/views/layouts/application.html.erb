@@ -21,7 +21,7 @@
         <%= render "layouts/flash" %>
       </div>
       <%= render(SidebarComponent.new(user: current_user)) %>
-      <section class="w-full h-full flex flex-col justify-between">
+      <section class="w-full h-full">
         <%= render(NavbarComponent.new(user: current_user)) %>
         <%= yield %>
         <%# <%= render(FooterComponent.new) %>

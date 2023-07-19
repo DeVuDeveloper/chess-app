@@ -38,7 +38,6 @@ class Game < ApplicationRecord
 '
   end
 
-  # used to rotate board for black player
   def orientation(user)
     if white_player_id == user.id
       'white'
@@ -46,7 +45,8 @@ class Game < ApplicationRecord
       'black'
     end
   end
+
+  def joined_users
+    User.joins(:user_games).where(user_games: { game_id: id })
+  end
 end
-
-
-  

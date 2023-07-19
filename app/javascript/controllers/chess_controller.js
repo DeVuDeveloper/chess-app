@@ -75,10 +75,6 @@ export default class extends Controller {
 
     };
     this.board = Chessboard("board", config);
-   
-    console.log("Piece theme:", config.pieceTheme); // Log the piece theme URL
-    console.log("Board element:", this.board)
-    
     this.gameOver();
   }
   removeGreySquares() {

@@ -1,21 +1,13 @@
-<div class="grid grid-cols-2 pt-4 gap-4">
-    <div class="col-span-2 text-center">
-    
-      <h2 class="text-xl font-bold mb-4">Choose the color of the chess pieces:</h2>
-
-    <div class="flex justify-center gap-8">
-
-      <%= simple_form_for Game.new, html: { class: "py-0" } do |f| %>
-        <%= f.input :challenger_id, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.submit "", type: :image, src: "/assets/whiteKing.png", class: "player-button h-16" %>
-      <% end %>
-
-      <%= simple_form_for Game.new do |f| %>
-        <%= f.input :challenger_id, as: :hidden, input_html: { value: user.id } %>
-        <%= f.submit "", type: :image, src: "/assets/blackKing.png", class: "player-button h-16" %>
-      <% end %>
-
-    </div>
-
-  <%= link_to "Cancel", games_path, class: " mt-4 btn btn-size py-1 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+<div class="col-span-2 text-center">
+  <h2 class="text-xl font-bold mb-4">Create game with white pieces:</h2>
+  <div class="flex justify-center gap-8">
+    <%= simple_form_for @game, html: { class: "py-0" } do |f| %>
+      <%= f.hidden_field :challenger_id, value: current_user.id %>
+      <%= f.hidden_field :challengee_id, value: user.id %>
+      <%= f.hidden_field :color, value: "white" %>
+      <%= f.submit "", type: :image, src: "/assets/whiteKing.png", class: "player-button h-16" %>
+    <% end %>
+  </div>
+  <%= link_to "Cancel", games_path, class: "mt-4 btn btn-size py-1 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
 </div>
+

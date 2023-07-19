@@ -1,47 +1,37 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy]
+  before_action :set_game, only: %i[edit update destroy]
   before_action :authenticate_user!
   include ColorConcerns
 
-  # GET /games or /games.json
   def index
     @users = User.all
-    @games = Game.all
+    @games = Game.includes(:user_games).all
   end
 
-  # GET /games/1 or /games/1.json
-  def show; end
-
-  # GET /games/new
   def new
     @game = Game.new
   end
 
-  # GET /games/1/edit
-  def edit; end
+  def edit
+  end
 
-  # POST /games or /games.json
   def create
     assign_colors
-    @game = Game.new(turn: :white,
-                     state: :in_progress,
-                     white_player_id: params[:game][:white_player_id],
-                     black_player_id: params[:game][:black_player_id])
+    @game = Game.new(turn: :white, state: :in_progress, white_player_id: params[:game][:white_player_id])
 
     respond_to do |format|
       if @game.save
-       UserGame.create(game: @game, user_id: params[:game][:challenger_id])
-       UserGame.create(game: @game, user_id: params[:game][:challengee_id])
+        # Inside the controller's create action after the game is saved
+        UserGame.create(game: @game, user: current_user, joined: true)
+
         format.html { redirect_to game_url(@game), notice: 'Game was successfully created.' }
         format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
-       
       end
     end
   end
 
-  # PATCH/PUT /games/1 or /games/1.json
   def update
     respond_to do |format|
       if @game.update(game_params)
@@ -49,16 +39,13 @@ class GamesController < ApplicationController
         format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
-        
       end
     end
   end
 
-  # DELETE /games/1 or /games/1.json
   def destroy
     @game.destroy
-
-    respond_to do |format|
+      respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.turbo_stream
     end
@@ -66,17 +53,11 @@ class GamesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_game
     @game = Game.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(
-      :color,
-      :challenger_id,
-      :challengee_id
-    )
+    params.require(:game).permit(:challenger_id)
   end
 end

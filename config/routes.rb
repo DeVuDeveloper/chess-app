@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   
   root "home#index"
-  resources :games
+  
+  resources :games do
+    member do
+      delete 'destroy_all_users', to: 'games#destroy_all_users'
+    end
+  end
 
   resources :home, only: :index
   get "contact", to: "home#contact_new"

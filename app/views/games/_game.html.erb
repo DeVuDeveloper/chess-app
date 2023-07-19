@@ -2,18 +2,38 @@
   <main class="container mx-auto px-4 py-4">
     <div class="flex flex-col bg-gray-100 rounded-lg">
       <div class="flex justify-between items-center">
-        <%= link_to game.id, game_path(game), data: { turbo_frame: "_top" }, class: "text-xl font-bold text-blue-500 hover:underline" %>
+        <%= link_to game.id, game_path(game.id), data: { turbo_frame: 'games', turbo_action: 'replace', turbo_frame_target: 'current_url' }, id: "game-#{game.id}", class: "text-xl font-bold text-blue-500 hover:underline" %>
         <div class="flex">
           <%= button_to "Delete",
                         game_path(game),
                         method: :delete,
                         class: "btn btn--light mr-2 text-red-500 hover:text-red-700" %>
-          <%= link_to "Edit",
-                      edit_game_path(game),
-                      class: "btn btn--light text-green-600 hover:text-gray-800" %>
         </div>
       </div>
-      <p>Game created on <%= game.created_at.strftime("%B %d, %Y %H:%M:%S") %>by<%= %></p>
+    
+       <% if game.white_player_id.present? %>
+        <% challenger = User.find(game.white_player_id) %>
+        <p><strong>Created by: </strong><%= challenger.email %> on <%= game.created_at.strftime("%B %d, %Y %H:%M:%S") %></p>
+      <% elsif game.black_player_id.present? %>
+        <% challenger = User.find(game.black_player_id) %>
+        <p>Created by: <%= challenger.email %> on <%= game.created_at.strftime("%B %d, %Y %H:%M:%S") %></p>
+      <% else %>
+        <p>Created by: Unknown</p>
+      <% end %>
     </div>
   </main>
+
+    <div id="<%= dom_id(game) %>">
+    <div class="row">
+      <div class="col-8">
+        <%= render partial: "games/board", locals: { game: game } %>
+      </div>
+      <div class="col-4" style="display: none;">
+        <%= render partial: "games/pgn", locals: { game: game } %>
+      </div>
+    </div>
+  </div>
+
 <% end %>
+
+
