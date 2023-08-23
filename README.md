@@ -38,12 +38,9 @@ Please note that the complete codebase, including features such as game analysis
 
 7. Access the application through your web browser at `http://localhost:3000`.
 
-
-
 ## Contact
 
 If you have questions or need further information about this project, please contact us at dejanvu.developer@gmail.com.
 
----
 
 Thank you for exploring the OpenAI Chess Chat and Image Generation App! We hope that this simplified version provides you with insights into utilizing OpenAI's capabilities for chat interactions and image creation.

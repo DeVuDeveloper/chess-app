@@ -12,7 +12,7 @@ class GetAiResponseJob < SidekiqJob
   def call_openai(chat:)
     message = chat.messages.create(role: "assistant", content: "loading", loader: true)
   
-    openai_client = OpenAI::Client.new(access_token: "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")
+    openai_client = OpenAI::Client.new(access_token: "YOUR-API-KEY")
     messages_for_openai = Message.for_openai(chat.messages)
   
     response = openai_client.chat(
