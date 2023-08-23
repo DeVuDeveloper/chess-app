@@ -1,0 +1,10 @@
+
+        <%= simple_form_for @chat, html: { class: "py-0" } do |f| %>
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <%= f.input :name %>
+          <%= f.submit "New Chat"%>
+        <% end %>
+
+     
+
+

@@ -2,5 +2,24 @@ en:
   global:
     menu:
       home: "Home"
+      games: "Games"
+      chat: "Chat"
       contact: "Contact"
+
       login: "Login"
+
+  
+  en:
+  simple_form:
+    placeholders:
+      game:
+        name: Name of your game
+    labels:
+      game:
+        name: Name
+
+  helpers:
+    submit:
+      game:
+        create: Create game
+        update: Update game

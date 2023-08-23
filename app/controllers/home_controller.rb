@@ -1,6 +1,11 @@
 class HomeController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def index
+    @games = Game.all
+    @game = Game.new
   end
+  
   
   def contact_new
     @contact_form = if current_user

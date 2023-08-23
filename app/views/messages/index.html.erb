@@ -1,0 +1,62 @@
+<%= turbo_stream_from "chats" %>
+<%= turbo_stream_from "messages" %>
+<%= turbo_stream_from "aimages" %>
+<%= turbo_stream_from "sounds" %>
+<div class="flex">
+  <div class="h-screen w-1/4 bg-gray-800 p-4">
+    <div class="mb-4 flex flex-col">
+    
+      <span class="border border-slate-400 rounded-lg px-4 py-2 mb-4 flex items-center justify-center hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24">
+          <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
+        </svg>
+        <%= link_to "New Chat", new_chat_messages_path, class: "ml-2 text-white", turbo_stream: true %>
+      </span>
+
+      <span class="border border-slate-400 rounded-lg px-4 py-2  mb-4 flex items-center justify-center hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24">
+          <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
+        </svg>
+        <%= link_to "New Image", new_aimage_path, data: { turbo_frame: dom_id(Aimage.new) }, class: "ml-2 text-white" %>
+        <%= turbo_frame_tag Aimage.new %>
+      </span>
+
+      <span class="border border-slate-400 rounded-lg px-4 py-2 mb-4 flex gap-4 items-center justify-center hover:bg-gray-700">
+        <%= link_to sounds_path, data: { turbo_frame: 'sounds' }, class: "ml-2 text-white" do %>
+          <%= content_tag :svg, xmlns: "http://www.w3.org/2000/svg", fill: "#fff", height: "24", viewBox: "0 -960 960 960", width: "24" do %>
+            <%= content_tag :path, nil, d: "M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" %>
+          <% end %>
+        <% end %>
+        <h2 class="text-white">Music</h2>
+        <%= link_to messages_path do %>
+          <%= content_tag :svg, xmlns: "http://www.w3.org/2000/svg", shape_rendering: "geometricPrecision", text_rendering: "geometricPrecision", image_rendering: "optimizeQuality", fill_rule: "evenodd", clip_rule: "evenodd", viewBox: "0 0 512 511.99", width: "24", height: "24" do %>
+            <%= content_tag :path, nil, fill: "#FC4032", fill_rule: "nonzero", d: "M256 0c70.68 0 134.68 28.67 181.01 74.99 46.32 46.32 74.99 110.32 74.99 181S483.33 390.68 437.01 437c-46.33 46.33-110.33 74.99-181.01 74.99-70.68 0-134.68-28.66-181.01-74.99C28.67 390.68 0 326.67 0 255.99c0-70.68 28.67-134.68 74.99-181C121.32 28.67 185.32 0 256 0z" %>
+            <%= content_tag :path, nil, fill: "#fff", d: "M381.4 234.68v42.63c0 10.08-8.3 18.38-18.38 18.38H148.98c-10.08 0-18.38-8.26-18.38-18.38v-42.63c0-10.12 8.26-18.38 18.38-18.38h214.04c10.12 0 18.38 8.33 18.38 18.38z" %>
+          <% end %>
+        <% end %>
+      </span>
+      
+      <div>
+        <%= turbo_frame_tag 'sounds' %>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <%= turbo_frame_tag 'chats' do %>
+        <%= render @chats %>
+      <% end %>
+      <%= turbo_frame_tag 'aimages' do %>
+        <%= render @aimages %>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex-1 p-4 flex flex-col">
+    <%= turbo_frame_tag "messages", data: { controller: "scroll" } do %>
+      <div id="messages">
+        <%= render @messages %>
+      </div>
+    <% end %>
+    <div class="">
+      <%= render 'form', message: @message , data: { turbo_frame: 'messages'} %>
+    </div>
+  </div>
+</div>

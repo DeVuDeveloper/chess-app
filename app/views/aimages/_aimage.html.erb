@@ -1,0 +1,20 @@
+<%= turbo_frame_tag aimage do %>
+  <main class="container mx-auto  py-4">
+    <div class="flex flex-col bg-gray-100 rounded-lg">
+      <% if aimage.url.present? %>
+        <%= image_tag aimage.url %>
+      <% else %>
+        <div class="flex items-center justify-center bg-gray-800">
+          <i class="fas fa-spinner fa-spin text-white text-4xl"></i>
+        </div>
+      <% end %>
+      <div class="flex justify-center">
+        <% if aimage.url.present? %>
+          <%= button_to "Delete", aimage_path(aimage), method: :delete, class: " btn btn-size px-4  text-red-500 font-semibold rounded-lg shadow-md hover:text-red-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+<% end %>
+

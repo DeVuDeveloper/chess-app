@@ -1,0 +1,10 @@
+
+
+  <div class="header">
+    <h1>New Chat</h1>
+  </div>
+
+  <%= turbo_frame_tag @chat do %>
+    <%= render "form", user: @user, chat: @chat %>
+  <% end %>
+</main>

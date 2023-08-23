@@ -1,3 +1,23 @@
-en:
   simple_form:
- 
+    placeholders:
+      chat:
+        id:Id
+      message:
+        content: Message
+       
+    labels:
+      chat:
+        id : Id
+      message:
+
+      message_content:
+       content:Content
+
+  helpers:
+    submit:
+      chat:
+        create: Create chat
+        update: Update chat
+      message_content:
+        create: Create content
+        upcontent: Update content

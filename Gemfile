@@ -22,7 +22,7 @@ gem "jsbundling-rails"
 gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem 'stimulus-rails'
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
@@ -76,5 +76,15 @@ gem "activeadmin"
 gem "simple_form", "~> 5.1.0"
 gem "view_component"
 gem "rufo"
-gem 'rails-i18n'
+
 gem 'i18n_generators'
+gem "sidekiq", "~> 7.0.9"
+gem "ruby-openai", "~> 4.0.0"
+gem 'kramdown'
+gem 'guard-livereload', '~> 2.5', require: false
+gem 'rouge'
+gem "image_processing", ">= 1.2"
+
+
+
+

@@ -1,0 +1,10 @@
+<main class="container">
+  <%= link_to sanitize("&larr; Back to game"), game_path(@game) %>
+
+  <div class="header">
+    <h1>Edit game</h1>
+  </div>
+ <%= turbo_frame_tag @game do %>
+    <%= render "form", game: @game %>
+  <% end %>
+</main>
